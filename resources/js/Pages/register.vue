@@ -1,12 +1,19 @@
 <script setup>
-import { reactive } from 'vue';
 
-const form = reactive({
+import { useForm } from '@inertiajs/vue3'
+const form = useForm({
     name:null,
     email:null,
     password:null,
     password_confirmation:null,
 });
+
+const submit = ()=>{
+    form.post('/register',{
+        onError: () => form.reset('password', 'password_confirmation'),
+    
+    });
+};
 </script>
 
 <template>
@@ -17,14 +24,17 @@ const form = reactive({
     <!--formulario-->
     <div class=" sm:w-1/2 px-16">
         <h2 class="font-bold text-2xl">Register</h2>
-        <form action="" class="flex flex-col">
+        <form @submit.prevent="submit" class="flex flex-col">
             
-            <input class="border p-2 my-2 rounded gap-4 mt-8" type="text" name="name" placeholder="name">
-            <input class="p-2 border my-2 rounded" type="text" name="email" placeholder="email">
-            <input class="border p-2 my-2 rounded" type="text" name="password" placeholder="password">
-            <input class="p-2 border my-2 rounded" type="text" name="confirm_password" placeholder="Confirmpassword">
+            <input  v-model="form.name" class="border p-2 my-2 rounded gap-4 mt-8" type="text" name="name" placeholder="name">
+            <small>{{form.errors.name}}</small>
+            <input v-model="form.email" class="p-2 border my-2 rounded" type="text" name="email" placeholder="email">
+            <small>{{form.errors.email}}</small>
+            <input v-model="form.password" class="border p-2 my-2 rounded" type="text" name="password" placeholder="password">
+            <small>{{form.errors.password}}</small>
+            <input v-model="form.password_confirmation" class="p-2 border my-2 rounded" type="text" name="confirm_password" placeholder="Confirmpassword">
 
-            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700">Register</button>
+            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
         </form>
         <p class="text-sm mt-4">Already have an account?<a class="text-blue-500 underline" href="/login"> login here</a></p>
     </div>
