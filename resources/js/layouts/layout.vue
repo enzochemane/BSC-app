@@ -12,10 +12,12 @@ import { Link,Head } from '@inertiajs/vue3';
             mx-auto">
                 <div class="space-x-6">
                     <Link :href="route('home')">Home</Link>
-                    <Link :href="route('tickets')">Tickets</Link>
-                    
-                    
                 </div>
+                <div class="space-x-6">
+                    <Link :href="route('tickets')">Tickets</Link>
+                </div>  
+                    
+                
             </nav>
         </header>
         <main class="p-4">
