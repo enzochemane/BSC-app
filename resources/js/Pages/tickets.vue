@@ -1,10 +1,4 @@
 
-<template>
-   
-    <p> Tickets page {{ user }}</p>
-    
-</template>
-
 <script setup>
 import layout from'../layouts/layout.vue';
 
@@ -13,4 +7,12 @@ defineProps({
     user: String
 })
 
+
+
 </script>
+<template>
+   
+    <p> Tickets page {{ user }}</p>
+    
+</template>
+

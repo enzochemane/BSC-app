@@ -1,6 +1,18 @@
 <script setup>
 import { route } from '../../../vendor/tightenco/ziggy/src/js';
+import { useForm } from '@inertiajs/vue3'
 
+const form = useForm({
+    email:null,
+    password:null
+});
+
+const submit = ()=>{
+    form.post('/login',{
+        onError: () => form.reset('password'),
+    
+    })
+};
 </script>
 
 <template>
@@ -13,12 +25,13 @@ import { route } from '../../../vendor/tightenco/ziggy/src/js';
         <h2 class="font-bold text-2xl">Login</h2>
         <p class="text-sm mt-4">if you already registed, easly log in</p>
         
-        <form action="" class="flex flex-col">
+        <form @submit.prevent="submit" class="flex flex-col">
             
-            <input class="border p-2 my-2 rounded gap-4 mt-8" type="text" name="email" placeholder="email">
-            <input class="p-2 border my-2 rounded" type="text" name="password" placeholder="password">
-        
-            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :href="route('home')">Login</button>
+            <input v-model="form.email" class="border p-2 my-2 rounded gap-4 mt-8" type="text" name="email" placeholder="email">
+            <small class="text-red-500">{{form.errors.email}}</small>
+            <input v-model="form.password" class="p-2 border my-2 rounded" type="text" name="password" placeholder="password">
+            <small class="text-red-500">{{form.errors.password}}</small>
+            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :href="route('login')">Login</button>
         </form>
         <div class="mt-5 grid grid-cols-3 items-center text-gray-500">
 

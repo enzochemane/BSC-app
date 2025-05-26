@@ -27,11 +27,11 @@ const submit = ()=>{
         <form @submit.prevent="submit" class="flex flex-col">
             
             <input  v-model="form.name" class="border p-2 my-2 rounded gap-4 mt-8" type="text" name="name" placeholder="name">
-            <small>{{form.errors.name}}</small>
+            <small class="text-red-500">{{form.errors.name}}</small>
             <input v-model="form.email" class="p-2 border my-2 rounded" type="text" name="email" placeholder="email">
-            <small>{{form.errors.email}}</small>
+            <small class="text-red-500">{{form.errors.email}}</small>
             <input v-model="form.password" class="border p-2 my-2 rounded" type="text" name="password" placeholder="password">
-            <small>{{form.errors.password}}</small>
+            <small class="text-red-500">{{form.errors.password}}</small>
             <input v-model="form.password_confirmation" class="p-2 border my-2 rounded" type="text" name="confirm_password" placeholder="Confirmpassword">
 
             <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
