@@ -7,7 +7,8 @@ defineOptions({layout: layout});
 
 <template>
    <h1>
-    Home page
+    Home page 
   </h1>
+  <p>welcome {{ $page.props.auth.user.name }}</p>
 
 </template>

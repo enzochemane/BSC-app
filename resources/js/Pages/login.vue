@@ -29,7 +29,7 @@ const submit = ()=>{
             
             <input v-model="form.email" class="border p-2 my-2 rounded gap-4 mt-8" type="text" name="email" placeholder="email">
             <small class="text-red-500">{{form.errors.email}}</small>
-            <input v-model="form.password" class="p-2 border my-2 rounded" type="text" name="password" placeholder="password">
+            <input v-model="form.password" class="p-2 border my-2 rounded" type="password" name="password" placeholder="password">
             <small class="text-red-500">{{form.errors.password}}</small>
             <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :href="route('login')">Login</button>
         </form>

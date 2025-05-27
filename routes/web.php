@@ -24,6 +24,8 @@ Route::get('/register', function () {
 
 Route::post('/register',[AuthController::class,'register']);
 
-//tickets
+//tickets (ainda nao esta bom)
 Route::inertia('/tickets','tickets',['user'=>'enzo']) ->name('tickets');
 
+//logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
