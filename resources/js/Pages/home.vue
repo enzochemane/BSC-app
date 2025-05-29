@@ -10,5 +10,6 @@ defineOptions({layout: layout});
     Home page 
   </h1>
   <p>welcome {{ $page.props.auth.user.name }}</p>
+  
 
 </template>

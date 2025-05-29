@@ -32,7 +32,7 @@ const submit = ()=>{
             <small class="text-red-500">{{form.errors.email}}</small>
             <input v-model="form.password" class="border p-2 my-2 rounded" type="text" name="password" placeholder="password">
             <small class="text-red-500">{{form.errors.password}}</small>
-            <input v-model="form.password_confirmation" class="p-2 border my-2 rounded" type="text" name="confirm_password" placeholder="Confirmpassword">
+            <input v-model="form.password_confirmation" class="p-2 border my-2 rounded" type="text" name="confirm_password" placeholder="Confirm_password">
 
             <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
         </form>

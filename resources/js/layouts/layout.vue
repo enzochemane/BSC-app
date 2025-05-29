@@ -12,6 +12,7 @@ import { Link,Head } from '@inertiajs/vue3';
             mx-auto">
                 <div class="space-x-6">
                     <Link :href="route('home')" class="hover:bg-gray-700 py-2 px-3 rounded-full" >Home</Link>
+                    <Link> {{ $page.props.auth.user.email }}</Link>
                 </div>
                 <div class="space-x-6">
                     <Link :href="route('tickets')" class="hover:bg-gray-700 py-2 px-3 rounded-full">Tickets</Link>
