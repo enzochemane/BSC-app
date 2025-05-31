@@ -12,18 +12,22 @@
                         <th class="py-2 px-4 text-left border">Problem</th>
                         <th class="py-2 px-4 text-left border">Description</th>
                         <th class="py-2 px-4 text-left border">Status</th>
+                        <th class="py-2 px-4 text-left border">Creator</th>
+                        <th class="py-2 px-4 text-left border">Agent</th>
                         <th class="py-2 px-4 text-left border">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="py-2 px-4 border">asdasd</td>
-                        <td class="py-2 px-4 border">asdasd</td>
-                        <td class="py-2 px-4 border">asdasd</td>
-                        <td class="py-2 px-4 border">asdasd</td>
-                        <td class="py-2 px-4 border">asdasd</td>
-                        <td>
-                       
+                  <tr v-for="ticket in tickets" :key="ticket.id">
+                       <td class="border px-4 py-2">{{ ticket.subject }}</td>
+                    <td class="border px-4 py-2">{{ ticket.problem }}</td>
+                    <td class="border px-4 py-2">{{ ticket.description }}</td>
+                    <td class="border px-4 py-2">{{ ticket.status }}</td>
+                    <td class="border px-4 py-2">{{ ticket.creator?.name ?? 'N/A' }}</td>
+                    <td class="border px-4 py-2">{{ ticket.agent?.name ?? 'Não atribuído' }}</td>
+                    <td class="border px-4 py-2">
+                        <Link :href="route('tickets.edit', ticket.id)" class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700">Edit</Link>
+                        
                     </td>
                     </tr>
                 </tbody>
@@ -41,7 +45,10 @@ import layout from '../layouts/layout.vue'
 import { Link } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3';
 
-defineProps(['tickets'])
+
+defineProps({
+  tickets: Array
+});
 
 defineOptions({ layout: layout })
 </script>

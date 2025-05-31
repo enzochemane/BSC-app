@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,24 @@ class ticketController extends Controller
      */
     public function index()
     {
-        return Inertia::render('tickets');
+     
+ $user = Auth::user();
+
+   $user = Auth::user();
+
+    if ($user->role === 'admin' || $user->role === 'agent') {
+        // Admins e agentes veem todos os tickets
+        $tickets = Ticket::with(['creator', 'agent'])->get();
+    } else {
+        // Usuário comum vê apenas os seus tickets
+        $tickets = Ticket::with(['creator', 'agent'])
+            ->where('user_id', $user->id)
+            ->get();
+    }
+
+    return Inertia::render('tickets', [
+        'tickets' => $tickets,
+    ]);
     }
 
     /**

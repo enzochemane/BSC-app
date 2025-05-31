@@ -36,7 +36,7 @@ const submit = ()=>{
 
             <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
         </form>
-        <p class="text-sm mt-4">Already have an account?<a class="text-blue-500 underline" href="/login"> login here</a></p>
+        <p class="text-sm mt-4">Already have an account?<a class="text-blue-500 underline" href="route('login')"> login here</a></p>
     </div>
 
     <!--imagem-->
