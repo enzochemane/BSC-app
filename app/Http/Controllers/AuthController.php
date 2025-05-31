@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     //login
     Auth ::login($user);
-
+    $userID = Auth::id();
     //redirecionar
     return redirect()->route("login");
     }
@@ -56,6 +56,6 @@ class AuthController extends Controller
  
     $request->session()->regenerateToken();
  
-    return redirect('/login');
+    return redirect()->route('login');
     }
 }

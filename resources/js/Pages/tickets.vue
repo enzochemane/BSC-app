@@ -1,55 +1,47 @@
-
-<script setup>
-import layout from'../layouts/layout.vue';
-import { useForm } from '@inertiajs/vue3'
-
-defineOptions({layout: layout});
-defineProps({
-    user: String
-})
-
-const form = useForm({
-    subject:null,
-    problem:null,
-    description:null,
-    status:null,
-});
-
-const submit = ()=>{
-    form.post('/tickets');
-};
-
-</script>
 <template>
+    <div class="mt-5 mx-4">
+        <div class="flex justify-between">
+            <h1 class="font-bold text-2xl">Tickets</h1>
+            <Link :href="route('tickets.create')" class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700">Create</Link>
+        </div>
 
-    <div class="w-1/2 mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
- <h2 class="font-bold text-2xl">Open Tickets</h2>
-        <form @submit.prevent="submit" class="flex flex-col">
-            
-           <label for="title" class="mt-4">Title</label>
-            <input  v-model="form.subject" class="border p-2 my-2 rounded gap-4 " type="text" name="title" placeholder="Title">
-            <small class="text-red-500">{{form.errors.subject}}</small>
-
-            <span>Problem Type</span>
-            <input v-model="form.problem" class="p-2 border my-2 rounded" type="text" name="problem" placeholder="Problem_Type">
-            <small class="text-red-500">{{form.errors.problem}}</small>
-            
-            <span>Status</span>
-            <select  v-model="form.status" class="p-2 border my-2 rounded" name="status" >
-                 <option value="">status</option>
-                <option value="open">Open</option>
-                <option value="closed">Close</option>
-                <option value="resolved">Resolved</option>
-            </select>
-            <small class="text-red-500">{{form.errors.status}}</small>
-
-            <textarea  v-model="form.description" class="border p-2 my-2 rounded" type="text" name="description"  rows="4" placeholder="Description"></textarea>
-            <small class="text-red-500">{{form.errors.description}}</small>
-            
-
-            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
-        </form>
+        <table class="w-full bg-white border border-gray-400 shadow">
+                <thead>
+                    <tr>
+                        <th class=" py-2 px-4 text-left border">Subject</th>
+                        <th class="py-2 px-4 text-left border">Problem</th>
+                        <th class="py-2 px-4 text-left border">Description</th>
+                        <th class="py-2 px-4 text-left border">Status</th>
+                        <th class="py-2 px-4 text-left border">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="py-2 px-4 border">asdasd</td>
+                        <td class="py-2 px-4 border">asdasd</td>
+                        <td class="py-2 px-4 border">asdasd</td>
+                        <td class="py-2 px-4 border">asdasd</td>
+                        <td class="py-2 px-4 border">asdasd</td>
+                        <td>
+                       
+                    </td>
+                    </tr>
+                </tbody>
+        </table>
     </div>
 
 </template>
 
+
+
+
+<script setup>
+import { route } from '../../../vendor/tightenco/ziggy/src/js';
+import layout from '../layouts/layout.vue'
+import { Link } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3';
+
+defineProps(['tickets'])
+
+defineOptions({ layout: layout })
+</script>
