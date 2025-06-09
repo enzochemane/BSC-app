@@ -21,8 +21,9 @@ const submit = ()=>{
 
 </script>
 <template>
-
-    <div class="w-1/2 mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+<div class="bg-gray-100 p-10">
+    <div class="w-1/2 mx-auto  p-6 bg-white rounded-2xl shadow-lg">
+       
  <h2 class="font-bold text-2xl">Open Tickets</h2>
         <form @submit.prevent="submit" class="flex flex-col">
             
@@ -48,9 +49,9 @@ const submit = ()=>{
             
 
             <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
-             <Link :href="route('tickets')"><button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Returnr</button></Link>
+
         </form>
     </div>
-
+</div>
 </template>
 

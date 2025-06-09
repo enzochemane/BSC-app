@@ -10,7 +10,7 @@ import { router } from '@inertiajs/vue3';
     </Head>
     <div>
         <header class=" bg-black text-gray text-white">
-            <nav class=" flex items-center justify-between p-6 max-w-screenn-lg
+            <nav class=" flex items-center justify-between p-5 max-w-screenn-lg
             mx-auto">
                 <div class="space-x-6">
                     <Link :href="route('home')" class="hover:bg-gray-700 py-2 px-3 rounded-full" >Home</Link>
@@ -19,7 +19,27 @@ import { router } from '@inertiajs/vue3';
                 <div class="space-x-6">
                    
                     <Link> {{ $page.props.auth.user.email }}</Link>
-                    <Link :href="route('tickets')" class="hover:bg-gray-700 py-2 px-3 rounded-full">Tickets</Link>
+
+                    <Link 
+                    :href="route('tickets')"
+                    class="hover:bg-gray-700 py-2 px-3 rounded-full">Tickets
+                    </Link>
+                   
+                   
+                    <Link
+                    v-if="$page.props.auth.user.role === 'admin'"
+                    :href="route('users')"
+                    class="hover:bg-gray-700 py-2 px-3 rounded-full">
+                    Users
+                    </Link>
+
+                    <!-- hide if not admin ya -->
+                    <Link
+                    v-else
+                    class="hidden"
+                    >
+                    Hidden
+                    </Link>
                     <Link :href="route('logout')" method="post" as="button" class="hover:bg-gray-700 py-2 px-3 rounded-full">logout</Link>
 
                 </div>  
@@ -27,7 +47,7 @@ import { router } from '@inertiajs/vue3';
                 
             </nav>
         </header>
-        <main class="p-4">
+        <main>
             <slot></slot>
         </main>
     </div>

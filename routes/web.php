@@ -29,7 +29,9 @@ Route::post('/register',[AuthController::class,'register']);
 
 
 
-//tickets 
+//--------------------------tickets routes-----------------------------
+
+//Display tickets
 Route::get('/tickets', [TicketController::class, 'index'])->name('tickets');
 
 
@@ -37,14 +39,31 @@ Route::get('/tickets', [TicketController::class, 'index'])->name('tickets');
 
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 
-//Store
+//Store ticket
 Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-//edit
-Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+//edit ticket
+Route::get('/tickets/{id}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
 
-//update
-Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
+//update ticket
+Route::put('/tickets/{id}', [TicketController::class, 'update'])->name('tickets.update');
 
+//delete ticket
+Route::delete('/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
+
+
+//--------------------------user routes---------------------------
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//users
+Route::get('/users', [AuthController::class, 'index'])->name('users');
+
+//edit user
+Route::get('/users/{id}/edit', [AuthController::class, 'edit'])->name('users.edit');
+
+//update user
+Route::put('/users/{id}', [AuthController::class, 'update'])->name('users.update');
+
+//delete user
+Route::delete('/users/{id}',[AuthController::class,'destroy'])->name('users.destroy');

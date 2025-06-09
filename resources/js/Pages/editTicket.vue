@@ -1,25 +1,29 @@
 <script setup>
 import layout from'../layouts/layout.vue';
 import { useForm } from '@inertiajs/vue3'
-
+import ticket from './tickets.vue';
 defineOptions({layout: layout});
-defineProps({ ticket: Object })
+
+const props = defineProps({
+     ticket: Object 
+    })
 
 const form = useForm({
-    subject: ticket.subject,
-    problem: ticket.problem,
-    description: ticket.description,
-    status: ticket.status
-});
+  subject: props.ticket.subject,
+  problem: props.ticket.problem,
+  description: props.ticket.description,
+  status: props.ticket.status
+})
 
 
 const submit = () => {
-    form.put(route('tickets.update', ticket.id));
+    form.put(route('tickets.update', props.ticket.id));
 };
 
 </script>
 
 <template>
+    <div class="min-h-screen bg-cover bg-black flex flex-col items-center justify-center" style="background: url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp); background-size: cover;min-height: calc(100vh - 64px);">
 
     <div class="w-1/2 mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
  <h2 class="font-bold text-2xl">Edit Tickets</h2>
@@ -46,9 +50,9 @@ const submit = () => {
             <small class="text-red-500">{{form.errors.description}}</small>
             
 
-            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
+            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Update</button>
         </form>
     </div>
-
+  </div>
 </template>
 

@@ -15,13 +15,11 @@ class ticketController extends Controller
      */
     public function index()
     {
-     
- $user = Auth::user();
 
    $user = Auth::user();
 
     if ($user->role === 'admin' || $user->role === 'agent') {
-        // Admins e agentes veem todos os tickets
+        //aqui Admins e agentes veem todos os tickets
         $tickets = Ticket::with(['creator', 'agent'])->get();
     } else {
         // Usuário comum vê apenas os seus tickets
@@ -111,6 +109,9 @@ class ticketController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ticket = Ticket::findOrFail($id);
+        $ticket->delete();
+
+        return redirect()->route('tickets');
     }
 }
