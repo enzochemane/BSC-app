@@ -1,8 +1,9 @@
 
 <script setup>
 import layout from '../layouts/layout.vue';
-
-defineOptions({layout: layout});
+import sideBar from '../layouts/sideBar.vue';
+defineOptions({layout: layout,
+  components: {sideBar}});
 </script>
 
 <template>

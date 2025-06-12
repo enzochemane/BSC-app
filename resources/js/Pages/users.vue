@@ -65,7 +65,7 @@ defineOptions({ layout: layout })
                     {{ user.created_at }}
                 </td>
                 <td class="px-6 py-4">
-                <button>  <a :href="route('users.edit', user.id)" class="text-white bg-gray-900 p-1 my-2 rounded hover:bg-gray-600 hover:underline">Edit</a>
+                <button>  <a :href="route('users.edit', user.id)" class="text-white bg-gray-900 p-1 my-2 rounded hover:bg-gray-600 hover:text-white">Edit</a>
                 </button>
 
                   <button

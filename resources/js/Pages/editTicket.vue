@@ -5,13 +5,15 @@ import ticket from './tickets.vue';
 defineOptions({layout: layout});
 
 const props = defineProps({
-     ticket: Object 
+     ticket: Object ,
+     agents: Array
     })
 
 const form = useForm({
   subject: props.ticket.subject,
-  problem: props.ticket.problem,
+ problem: props.ticket.problem,
   description: props.ticket.description,
+  agent_id: props.ticket.agent_id,
   status: props.ticket.status
 })
 
@@ -45,6 +47,28 @@ const submit = () => {
                 <option value="resolved">Resolved</option>
             </select>
             <small class="text-red-500">{{form.errors.status}}</small>
+
+        <div v-if="$page.props.auth.user.role === 'agent'" class="flex flex-col">
+            <span>Agents</span> <br>
+            <select v-model="form.agent_id" class="p-2 border my-2 rounded" name="agent_id">
+                <option value="">Select Agent</option>
+                <option :value="$page.props.auth.user.id">{{ $page.props.auth.user.name }}</option>
+            </select>
+        </div>
+
+        <div v-else-if="$page.props.auth.user.role === 'admin'" class="flex flex-col">
+            <span>Agents</span> <br>
+            <select v-model="form.agent_id" class="p-2 border my-2 rounded" name="agent_id">
+                <option value="">Select Agent</option>
+        <option v-for="agent in agents" :key="agent.id" :value="agent.id">
+            {{ agent.name }}
+        </option>
+    </select>
+</div>
+
+<div v-else class="hidden"></div>
+
+        
 
             <textarea  v-model="form.description" class="border p-2 my-2 rounded" type="text" name="description"  rows="4" placeholder="Description"></textarea>
             <small class="text-red-500">{{form.errors.description}}</small>

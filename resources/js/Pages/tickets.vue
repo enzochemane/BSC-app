@@ -2,7 +2,7 @@
     <div class=" bg-cover bg-black flex flex-col items-center " style="background: url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp); background-size: cover; height: calc(100vh - 64px);">
     <div class="mt-5 mx-4">
         <div class="flex justify-between">
-            <h1 class="font-bold text-2xl">Tickets</h1>
+            <h1 class="text-white font-bold text-2xl">Tickets</h1>
             <Link :href="route('tickets.create')" class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700">Create</Link>
         </div>
 
@@ -18,7 +18,7 @@
                         <th class="py-2 px-4 text-left border  bg-gray-500">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                   <tr v-for="ticket in tickets" :key="ticket.id">
                        <td class="border px-4 py-2">{{ ticket.subject }}</td>
                     <td class="border px-4 py-2">{{ ticket.problem }}</td>

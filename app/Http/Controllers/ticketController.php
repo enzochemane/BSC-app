@@ -19,10 +19,10 @@ class ticketController extends Controller
    $user = Auth::user();
 
     if ($user->role === 'admin' || $user->role === 'agent') {
-        //aqui Admins e agentes veem todos os tickets
+        //admin and agents see all tickets
         $tickets = Ticket::with(['creator', 'agent'])->get();
     } else {
-        // Usuário comum vê apenas os seus tickets
+        // users see their own tickets
         $tickets = Ticket::with(['creator', 'agent'])
             ->where('user_id', $user->id)
             ->get();
@@ -57,9 +57,9 @@ class ticketController extends Controller
         'subject' => $request->subject,
         'problem' => $request->problem,
         'description' => $request->description,
-        'status' => $request->status ?? 'open', // status padrão se não for enviado
-        'user_id' => Auth::user()->id, // usuário logado cria o ticket
-        'agent_id' => null, // agente será atribuído depois
+        'status' => $request->status ?? 'open', 
+        'user_id' => Auth::user()->id, 
+        'agent_id' => null, 
     ]);
 
         return redirect()->route('tickets');
@@ -78,10 +78,23 @@ class ticketController extends Controller
      */
     public function edit(string $id)
     {
-       $ticket = Ticket::findOrFail($id); // <-- Aqui buscas o ticket com base no ID
+      $user = Auth::user();
 
-    return Inertia::render('editTicket', [ // <-- Certifica-te que o nome do componente está correto
-        'ticket' => $ticket
+    $ticket = Ticket::findOrFail($id);
+
+       
+
+    if ($user->role === 'agent') {
+        // agent only see his name
+        $agents = User::where('id', $user->id)->get();
+    } else {
+        
+        $agents = User::where('role', 'agent')->get();
+    }
+
+    return Inertia::render('editTicket', [
+        'ticket' => $ticket,
+        'agents' => $agents,
     ]);
     }
 
@@ -90,16 +103,16 @@ class ticketController extends Controller
      */
     public function update(Request $request, string $id)
     {
-     $request->validate([
+     $validated = $request->validate([
         'subject' => 'required',
         'problem' => 'required',
         'description' => 'required',
+        'agent_id' => 'nullable|exists:users,id',
         'status' => 'required'
     ]);
 
-    $ticket = Ticket::findOrFail($id); // <-- Aqui defines a variável corretamente
-
-    $ticket->update($request->all());
+    $ticket = Ticket::findOrFail($id);
+    $ticket->update($validated);
 
     return redirect()->route('tickets');
     }

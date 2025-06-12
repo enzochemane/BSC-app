@@ -21,8 +21,9 @@ const submit = ()=>{
 
 </script>
 <template>
-<div class="bg-gray-100 p-10">
-    <div class="w-1/2 mx-auto  p-6 bg-white rounded-2xl shadow-lg">
+<div class="bg-gray-100 p-10" style="background: url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp); background-size: cover;min-height: calc(100vh - 64px);">
+
+    <div class="w-1/2 mx-auto  p-6 bg-white shadow-lg" >
        
  <h2 class="font-bold text-2xl">Open Tickets</h2>
         <form @submit.prevent="submit" class="flex flex-col">
@@ -34,21 +35,13 @@ const submit = ()=>{
             <span>Problem Type</span>
             <input v-model="form.problem" class="p-2 border my-2 rounded" type="text" name="problem" placeholder="Problem_Type">
             <small class="text-red-500">{{form.errors.problem}}</small>
-            
-            <span>Status</span>
-            <select  v-model="form.status" class="p-2 border my-2 rounded" name="status" >
-                 <option value="">status</option>
-                <option value="open">Open</option>
-                <option value="closed">Close</option>
-                <option value="resolved">Resolved</option>
-            </select>
-            <small class="text-red-500">{{form.errors.status}}</small>
+
 
             <textarea  v-model="form.description" class="border p-2 my-2 rounded" type="text" name="description"  rows="4" placeholder="Description"></textarea>
             <small class="text-red-500">{{form.errors.description}}</small>
             
 
-            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Register</button>
+            <button class="bg-gray-900 text-white p-2 my-2 rounded hover:bg-gray-700" :disabled="form.processing">Open</button>
 
         </form>
     </div>

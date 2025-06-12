@@ -16,7 +16,7 @@ const submit = ()=>{
 </script>
 
 <template>
-<div class="bg-gray-50 min-h-screen flex  items-center justify-center">
+<div class="bg-gray-300 min-h-screen flex  items-center justify-center">
     <!--conteiner do login-->
 <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
 
