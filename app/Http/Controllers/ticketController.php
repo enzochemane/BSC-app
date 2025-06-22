@@ -127,4 +127,21 @@ class ticketController extends Controller
 
         return redirect()->route('tickets');
     }
+
+    public function dashboard()
+{
+    $user = Auth::user();
+
+    if ($user->role !== 'admin') {
+        abort(403, 'Acesso negado');
+    }
+
+    return Inertia::render('Dashboard', [
+        'totalTickets' => Ticket::count(),
+        'openTickets' => Ticket::where('status', 'open')->count(),
+        'unassignedTickets' => Ticket::whereNull('agent_id')->count(),
+        'totalUsers' => User::count(),
+        'totalAgents' => User::where('role', 'agent')->count(),
+    ]);
+}
 }

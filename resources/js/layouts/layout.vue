@@ -10,11 +10,13 @@ import { router } from '@inertiajs/vue3';
     </Head>
     <div>
         <header class=" bg-black text-gray text-white">
-            <nav class=" flex items-center justify-between p-5 max-w-screenn-lg
+            <nav class=" flex items-center justify-between p-4 max-w-screenn-lg
             mx-auto">
                 <div class="space-x-6">
-                    <Link :href="route('home')" class="hover:bg-gray-700 py-2 px-3 rounded-full" >Home</Link>
-                    
+              <!----      <Link :href="route('home')" class="hover:bg-gray-700 py-2 px-3 rounded-full" >Home</Link> -->
+                    <a href="#">
+        <img class="w-auto h-6 sm:h-7" src="https://merakiui.com/images/logo.svg" alt="">
+                    </a>
                 </div>
                 <div class="space-x-6">
                    

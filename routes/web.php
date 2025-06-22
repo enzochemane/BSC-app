@@ -67,3 +67,6 @@ Route::put('/users/{id}', [AuthController::class, 'update'])->name('users.update
 
 //delete user
 Route::delete('/users/{id}',[AuthController::class,'destroy'])->name('users.destroy');
+
+//-----------------------------------------Dasboard Admin--------------------------------
+Route::get('/dashboard', [ticketController::class, 'dashboard'])->name('dashboard');
