@@ -5,8 +5,9 @@ use App\Models\ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Mail\ticketMail;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 
 class ticketController extends Controller
 {
@@ -20,10 +21,10 @@ class ticketController extends Controller
 
     if ($user->role === 'admin' || $user->role === 'agent') {
         //admin and agents see all tickets
-        $tickets = Ticket::with(['creator', 'agent'])->get();
+        $tickets = Ticket::with(['user', 'agent'])->get();
     } else {
         // users see their own tickets
-        $tickets = Ticket::with(['creator', 'agent'])
+        $tickets = Ticket::with(['user', 'agent'])
             ->where('user_id', $user->id)
             ->get();
     }
@@ -50,19 +51,31 @@ class ticketController extends Controller
             'subject' => 'required',
             'problem' => 'required',
             'description' => 'required',
+            'agent_id' => 'nullable|exists:users,id',
             
         ]);
 
-    Ticket::create([
+   $ticket = Ticket::create([
         'subject' => $request->subject,
         'problem' => $request->problem,
         'description' => $request->description,
         'status' => $request->status ?? 'open', 
         'user_id' => Auth::user()->id, 
-        'agent_id' => null, 
+        'agent_id' => $request->agent_id, 
     ]);
 
-        return redirect()->route('tickets');
+       // send email to user
+        if ($ticket->user && $ticket->user->email) {
+        Mail::to($ticket->user->email)->send(new TicketMail($ticket));
+    }
+
+        // send email to agent
+        if ($ticket->agent_id && $ticket->agent) {
+        Mail::to($ticket->agent->email)->send(new TicketMail($ticket));
+    }
+
+        return redirect()->route('tickets')->with('success', 'Ticket criado com sucesso. Um email foi enviado.');
+
     }
 
     /**
@@ -108,12 +121,15 @@ class ticketController extends Controller
         'problem' => 'required',
         'description' => 'required',
         'agent_id' => 'nullable|exists:users,id',
-        'status' => 'required'
+        'status' => 'nullable'
     ]);
 
     $ticket = Ticket::findOrFail($id);
     $ticket->update($validated);
-
+    
+if ($ticket->agent_id && $ticket->agent) {
+        Mail::to($ticket->agent->email)->send(new TicketMail($ticket));
+    }
     return redirect()->route('tickets');
     }
 

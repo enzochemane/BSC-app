@@ -49,7 +49,7 @@ const submit = () => {
             <small class="text-red-500">{{form.errors.status}}</small>
 
         <div v-if="$page.props.auth.user.role === 'agent'" class="flex flex-col">
-            <span>Agents</span> <br>
+            <label>Agents</label>
             <select v-model="form.agent_id" class="p-2 border my-2 rounded" name="agent_id">
                 <option value="">Select Agent</option>
                 <option :value="$page.props.auth.user.id">{{ $page.props.auth.user.name }}</option>
@@ -57,7 +57,7 @@ const submit = () => {
         </div>
 
         <div v-else-if="$page.props.auth.user.role === 'admin'" class="flex flex-col">
-            <span>Agents</span> <br>
+            <span>Agents</span>
             <select v-model="form.agent_id" class="p-2 border my-2 rounded" name="agent_id">
                 <option value="">Select Agent</option>
         <option v-for="agent in agents" :key="agent.id" :value="agent.id">
@@ -69,7 +69,7 @@ const submit = () => {
 <div v-else class="hidden"></div>
 
         
-
+            <span>Description</span>
             <textarea  v-model="form.description" class="border p-2 my-2 rounded" type="text" name="description"  rows="4" placeholder="Description"></textarea>
             <small class="text-red-500">{{form.errors.description}}</small>
             

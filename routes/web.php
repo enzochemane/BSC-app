@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Models\ticket;
 use App\Http\Controllers\ticketController;
+use App\Http\Controllers\requestController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -68,5 +69,12 @@ Route::put('/users/{id}', [AuthController::class, 'update'])->name('users.update
 //delete user
 Route::delete('/users/{id}',[AuthController::class,'destroy'])->name('users.destroy');
 
+//----------------------------------Request----------------------------------------
+Route::get('/request/create',[requestController::class, 'create'])->name('request.create');
+Route::get('/request',[requestController::class, 'index'])->name('request.index');
+Route::post('/request',[requestController::class, 'store'])->name('request.store');
+Route::get('/request/{id}/edit', [requestController::class, 'edit'])->name('request.edit');
+Route::put('/request/{id}', [requestController::class, 'update'])->name('request.update');
+Route::delete('/request/{id}', [requestController::class, 'destroy'])->name('request.destroy');
 //-----------------------------------------Dasboard Admin--------------------------------
 Route::get('/dashboard', [ticketController::class, 'dashboard'])->name('dashboard');

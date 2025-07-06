@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class, 'agent_id');
     }
+
+     public function requests()
+    {
+        return $this->hasMany(request::class, 'user_id');
+    }
 }

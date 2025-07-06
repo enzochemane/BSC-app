@@ -2,6 +2,7 @@
 import layout from '../layouts/layout.vue';
 import sideBar from '../layouts/sideBar.vue';
 import PieChart from '../charts/PieChart.vue';
+import { route } from '../../../vendor/tightenco/ziggy/src/js';
 
 
 const props = defineProps({
@@ -14,7 +15,7 @@ const props = defineProps({
 });
 
 const chartData = {
-  labels: ['Abertos', 'Fechados', 'Sem Agente'],
+  labels: ['Open', 'closed', 'unassigned'],
   datasets: [
     {
       label: 'Tickets',
@@ -32,22 +33,22 @@ const chartData = {
 
     <div class="flex flex-1">
       <!-- Sidebar -->
-      <sideBar class="w-64 bg-gray-800 text-white" />
+      <sideBar class="w-64" />
      
       <!-- Content -->
-      <div class="flex-1 p-4 bg-white">
-        <h1 class="mt-2 text-2xl font-bold text-gray-700">Dashboard</h1>
-        <hr class="h-2 bg-gray-400 border-0 my-6 rounded">
-        <div class="p-4 sm:ml-10">
-           <div class="p-4  border-white-200 shadow rounded-lg mt-1">
+      <div class="flex-1 p-4 bg-gray-50 dark:bg-gray-800">
+        <h1 class="mt-2 text-2xl font-bold text-gray-700 dark:text-gray-200">Dashboard</h1>
+        <hr class="h-2 bg-gray-300 border-0 my-6 rounded">
+        <div class="p-4 sm:ml-6">
+           <div class="p-4  border-white-200 shadow rounded-lg mt-1 ">
       <div class="grid grid-cols-4 gap-4 mb-4">
 
 <!--card1-->
-<div class="max-w-sm p-6 border-gray-200 rounded-lg shadow bg-gray-100 dark:border-gray-700">
+<div class="max-w-sm p-6 rounded-lg shadow bg-gray-100 border border-gray-300">
   
-    <a href="#">
+    <Link :href="route('tickets')">
         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">Tickets: {{totalTickets}}</h5>
-    </a>
+    </Link>
       <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
         See our guideline
         <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -56,11 +57,11 @@ const chartData = {
     </a>
 </div>
       <!----------------------card2-------------------->
-        <div class="max-w-sm p-6  border-gray-200 rounded-lg shadow  bg-gray-100 ">
+        <div class="max-w-sm p-6 border border-gray-300 rounded-lg shadow  bg-gray-100 ">
     
-    <a href="#">
+    <Link :href="route('users')">
         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-black">Agents: {{ totalAgents }}</h5>
-    </a>
+    </Link>
      <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
         See our guideline
         <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -71,11 +72,11 @@ const chartData = {
 
 <!-----------------card3-------------------->
 
-         <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+         <div class="max-w-sm p-6 border border-gray-300 rounded-lg shadow bg-gray-100 ">
              
-    <a href="#">
-        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Not assign Tickets: {{ unassignedTickets }}</h5>
-    </a>
+    <Link :href="route('tickets')">
+        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-black ">Unassigned Tickets: {{ unassignedTickets }}</h5>
+    </Link>
     <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
         See our guideline
         <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -85,11 +86,11 @@ const chartData = {
 </div>
 
    <!--------------------card4-------------------->
-          <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div class="max-w-sm p-6 border border-gray-300 rounded-lg shadow bg-gray-100 ">
     
 
     <a href="#">
-        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Accounts: {{ totalUsers }}</h5>
+        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900  ">Accounts: {{ totalUsers }}</h5>
     </a>
     <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
         See our guideline
@@ -102,16 +103,18 @@ const chartData = {
       </div>
     <!--Abaixo dos cards-->
     <!--chart pie-->
-<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="grid grid-cols-2 gap-4 mb-4 ">
     
-         <div class="flex items-center justify-center rounded-sm bg-gray-100 h-70">
-        <div class=" h-40 w-60 mx-auto">
+         <div class="flex items-center justify-center rounded-sm bg-gray-100 h-70 shadow border border-gray-300 ">
+        <div class=" h-50 w-60 mx-auto">
         <PieChart :chartData="chartData" />
         </div>
          </div>
 <!--chart bar-->
-         <div class="flex items-center justify-center rounded-sm bg-gray-50 h-70  dark:bg-gray-800">
-        <div class="h-50 w-40 mx-auto">
+<!-- dark:bg-gray-800-->
+
+         <div class="flex items-center justify-center rounded-sm h-70  border border-gray-300 bg-gray-100 shadow">
+        <div class="h-50 w-60 mx-auto">
         <PieChart :chartData="chartData" />
         </div>
          </div>

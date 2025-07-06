@@ -7,6 +7,7 @@ import {
   Legend,
   ArcElement
 } from 'chart.js'
+import { color } from 'chart.js/helpers'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
@@ -19,10 +20,12 @@ const options = {
   plugins: {
     legend: {
       position: 'bottom'
+      
     },
     title: {
       display: true,
-      text: 'Distribuição dos Tickets'
+      text: 'Tickets',
+      
     }
   }
 }

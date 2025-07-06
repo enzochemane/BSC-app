@@ -29,19 +29,19 @@ import { router } from '@inertiajs/vue3';
                    
                    
                     <Link
-                    v-if="$page.props.auth.user.role === 'admin'"
-                    :href="route('users')"
+                    :href="route('request.index')"
                     class="hover:bg-gray-700 py-2 px-3 rounded-full">
-                    Users
+                    Request
                     </Link>
 
-                    <!-- hide if not admin ya -->
+                    <!-- hide if not admin ya 
                     <Link
                     v-else
                     class="hidden"
-                    >
+                    
                     Hidden
-                    </Link>
+                    </Link>-->
+
                     <Link :href="route('logout')" method="post" as="button" class="hover:bg-gray-700 py-2 px-3 rounded-full">logout</Link>
 
                 </div>  

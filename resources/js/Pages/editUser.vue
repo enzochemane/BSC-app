@@ -34,6 +34,7 @@ const form = useForm({
                 <option value="admin">admin</option>
                 <option value="user">user</option>
                 <option value="agent">agent</option>
+                <option value="manager">manager</option>
             </select>
             <small class="text-red-500">{{form.errors.role}}</small>
 

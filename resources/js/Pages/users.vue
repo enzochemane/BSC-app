@@ -18,20 +18,20 @@ defineProps({
   <div class="flex min-h-screen">
 
     <!-- Sidebar -->
-    <sideBar class="w-64 bg-gray-800 text-white" />
+    <sideBar class="w-64" />
 
     <!-- Conteúdo principal -->
-     <div class="flex-1 p-4 bg-gray-100">
+     <div class="flex-1 p-4 bg-gray-50 dark:bg-gray-800">
       <div class="mt-5 mx-4">
         <div class="flex justify-between">
-          <h1 class="text-2xl font-bold text-gray-700">Accounts</h1>
+          <h1 class="text-2xl font-bold text-gray-700 dark:text-white">Accounts</h1>
        
         </div>
- <hr class="h-2 bg-gray-400 border-0 my-6 rounded">
+ <hr class="h-2 bg-gray-300 border-0 my-6 rounded dark:bg-gray-300">
 
 
         <div class="relative overflow-x-auto border-dashed shadow-md sm:rounded-lg mt-10">
-          <table class="w-full bg-white text-sm text-left rtl:text-right text-gray-500">
+          <table class="w-full bg-white  text-sm text-left rtl:text-right text-gray-500">
             <thead class="text-xs text-white uppercase bg-black">
               <tr>
                 <th class="px-6 py-3">Name</th>
